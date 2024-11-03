@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+spacy==3.7.5
+spacy-transformers
+python-dotenv
+sentry-sdk[fastapi]

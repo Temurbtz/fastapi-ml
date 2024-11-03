@@ -1,0 +1,10 @@
+{
+  "labels":[
+    "World",
+    "Sports",
+    "Business",
+    "Science/Technology"
+  ],
+  "threshold":0.0,
+  "positive_label":null
+}

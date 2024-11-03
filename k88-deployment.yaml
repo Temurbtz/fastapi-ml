@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-ml-deployment
+  labels:
+    app: fastapi-ml
+spec:
+  replicas: 3  
+  selector:
+    matchLabels:
+      app: fastapi-ml
+  template:
+    metadata:
+      labels:
+        app: fastapi-ml
+    spec:
+      containers:
+      - name: fastapi-ml-container
+        image: temur2000/ml_text_projects:latest 
+        ports:
+        - containerPort: 8000
+        env:
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              name: sentry-secret
+              key: dsn  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-ml-service
+spec:
+  selector:
+    app: fastapi-ml
+  ports:
+    - protocol: TCP
+      port: 80  
+      targetPort: 8000  
+  type: LoadBalancer  
